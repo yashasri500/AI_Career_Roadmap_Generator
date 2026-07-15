@@ -738,6 +738,7 @@ if st.session_state.logged_in:
                     )
 
                 else:
+                    st.error(str(e))
                     st.error(
                         "❌ Something went wrong while generating your roadmap. Please try again in a few minutes."
                     )

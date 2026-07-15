@@ -30,13 +30,12 @@ def generate_career_roadmap(
             "gemini-2.5-flash"
         )
 
-        response = model.generate_content(
-            prompt
-        )
-        print(repr(response.text))
+        response = model.generate_content(prompt)
+
+        print(response)
+        print(response.text)
 
         return response.text
-
     except Exception as e:
 
         raise e
