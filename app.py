@@ -39,6 +39,17 @@ st.set_page_config(
 )
 st.markdown("""
 <style>
+:root{
+    color-scheme: light !important;
+}
+
+html, body, [data-testid="stAppViewContainer"]{
+    color-scheme: light !important;
+}
+</style>
+""", unsafe_allow_html=True)
+st.markdown("""
+<style>
 [data-testid="stSidebarNav"] {
     display: none !important;
 }
