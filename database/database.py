@@ -54,6 +54,19 @@ def create_tables():
             prep_score TEXT
         )
     """)
+    # ==========================
+    # Analytics Table
+    # ==========================
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS analytics(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT,
+            event TEXT,
+            event_time TEXT
+        )
+    """)
+    
 
     connection.commit()
     connection.close()
+    

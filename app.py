@@ -16,6 +16,7 @@ from ai.roadmap_generator import generate_career_roadmap
 from ai.chat import career_chat
 from database.database import create_connection, create_tables
 from pdf.pdf_generator import create_roadmap_pdf, create_full_report_pdf
+from database.analytics import log_visitor
 # ==========================================================
 # GEMINI AI CONFIGURATION
 # ==========================================================
@@ -37,6 +38,7 @@ st.set_page_config(
     page_icon="🚀",
     layout="wide"
 )
+    
 st.markdown("""
 <style>
 :root{
@@ -62,6 +64,9 @@ st.markdown("""
 
 DATABASE_NAME = "career_roadmap.db"
 create_tables()
+if "visitor_logged" not in st.session_state:
+    log_visitor("Guest", "visit")
+    st.session_state.visitor_logged = True
 
 # ==========================================================
 # PASSWORD HASHING
@@ -423,6 +428,7 @@ if not st.session_state.logged_in:
                     st.success(
                         f"🎉 Welcome {login_username}"
                     )
+                    log_visitor(login_username, "login")
 
                     st.rerun()
 
@@ -558,6 +564,11 @@ if st.session_state.logged_in:
         )
         if history_button:
             st.switch_page("pages/roadmap_history.py")
+        if st.session_state.username == "devi":
+            admin_button = st.button("📊 Admin Dashboard")
+
+            if admin_button:
+                st.switch_page("pages/admin_dashboard.py")
     st.markdown("---")
 
     st.markdown(
